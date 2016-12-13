@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name=viewport content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>台灣科大設計週</title>
+  <link rel="icon" href="ttdw.ico">
+  <link rel="stylesheet" href="css/ttdw.min.css"/>
+</head>
+<body onload="initialize()">
+  <div id=fb-root></div>
+  <script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="//connect.facebook.net/zh_TW/all.js#xfbml=1";fjs.parentNode.insertBefore(js,fjs);}(document,'script','facebook-jssdk'));</script>
+  <div id=like>
+    <div class="fb-like-box like" data-href="https://www.facebook.com/taiwantech.dw" data-colorscheme=dark data-show-faces=false data-header=false data-stream=false data-show-border=false></div>
+  </div>
+  <div class="loader hidden-xs">
+    <div id=loading>
+      <svg id=qq width=150 height=150 xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path d="m51.27432,70.52188c-3.71721,15.67317 8.16964,30.70948 24.27774,30.70948s27.99485,-15.0356 24.27764,-30.70948c-4.85581,-20.47318 -9.71091,-40.94567 -14.56673,-61.41886c-2.42786,-10.23659 -16.99468,-10.23659 -19.42253,0c-4.85511,20.47319 -9.71091,40.94567 -14.56612,61.41886z"/>
+        </g>
+      </svg>
+      <div class=txt>載入中</div>
+    </div>
+  </div>
+  <div id=bg class=hidden-xs></div>
+  <div id=bg-f class=hidden-xs></div>
+  <span class="vs hidden-xs"></span>
+  <video class="hidden-xs fuckup" id=vbg-odyssey preload=auto autoplay loop muted volume=0>
+    <source src="video/odyssey.mp4" type="video/mp4"/>
+  </video>
+  <video class="hidden-xs fuckup" id=vbg-tron preload=auto autoplay loop muted volume=0>
+    <source src="video/tron.mp4" type="video/mp4"/>
+  </video>
+  <nav id=nav class="navbar navbar-inverse navbar-fixed-top" role=navigation style=z-index:1030>
+    <div class=navbar-header>
+      <button type=button class=navbar-toggle data-toggle=collapse data-target="#navnavnav">
+        <span class=sr-only>Toggle navigation</span>
+        <span class=icon-bar></span>
+        <span class=icon-bar></span>
+        <span class=icon-bar></span>
+      </button>
+      <div class=logotypeMini>
+        <svg width=69 height=25 xmlns="http://www.w3.org/2000/svg">
+          <g id=logotypeMini>
+            <path d="m15.00244,15.04753c0,0.08418 -0.02374,0.16743 -0.0831,0.22901c0,0.03601 -0.02759,0.07218 -0.03869,0.10679l-6.02128,9.72271c-0.0461,0.10741 -0.16635,0.16446 -0.16635,0.16446c-0.13953,0 -0.16558,0 -0.21168,-0.01511c-0.14184,-0.04193 -0.23758,-0.17273 -0.23758,-0.3252l0,-16.3684c0,-0.19003 0.144,-0.34156 0.34457,-0.34156l6.07108,0c0.18778,0 0.34303,0.15168 0.34303,0.34156l0,6.48575l0,-0.00001z"/>
+            <path d="m0.33328,6.71243c-0.11655,0 -0.23758,-0.06454 -0.28722,-0.16665c-0.06691,-0.11551 -0.05565,-0.25223 0,-0.36105l3.71859,-6.02852c0.06105,-0.09759 0.16635,-0.15621 0.29709,-0.15621l14.70399,0l0.09343,0l-0.05642,0.10804l-0.037,0.05939l-3.658,6.54499l-14.77446,0l0,0.00001z"/>
+            <path d="m21.26129,0.00001l18.01789,0c0.12688,0 0.23619,0.07218 0.29247,0.17413c0.07199,0.11349 0.07199,0.24787 0,0.35372l-3.7135,6.0226c-0.07201,0.10273 -0.18116,0.16213 -0.29709,0.16213l-18.19426,0l3.89449,-6.71258z"/>
+            <path d="m21.21303,25.27034c0,0 -0.07199,0 -0.0942,-0.01512c-0.15602,-0.04193 -0.23758,-0.17273 -0.23758,-0.32519l0,-16.36824c0,-0.19003 0.14261,-0.34156 0.33177,-0.34156l6.07124,0c0.18778,0 0.34303,0.15168 0.34303,0.34156l0,6.48575c0,0.08418 -0.03854,0.16743 -0.072,0.22901c-0.0111,0.03601 -0.03346,0.07218 -0.04979,0.10679l-6.00648,9.7227c-0.06091,0.10725 -0.18038,0.16431 -0.28599,0.16431l0,-0.00001z"/>
+            <path d="m42.44923,19.22218l-3.71798,6.0293c-0.07122,0.09463 -0.17683,0.15995 -0.28598,0.15995l-14.3326,0c-0.1329,0 -0.23773,-0.07219 -0.3105,-0.17866c-0.06013,-0.09541 -0.06013,-0.23353 0,-0.34312l3.53744,-6.02181c0.06029,-0.11037 0.16558,-0.17928 0.28737,-0.17928l14.53611,0c0.12025,0 0.23757,0.07655 0.28583,0.18318c0.0723,0.11021 0.0723,0.24007 0.00031,0.35044z"/>
+            <path d="m48.93164,25.09838c0,0.15309 -0.10546,0.27937 -0.23837,0.32441c-0.03344,0.01419 -0.07121,0.01419 -0.1056,0.01419c0,0 -0.21383,-0.04802 -0.27026,-0.1322l-10.38214,-17.40306c-0.07138,-0.10881 -0.08232,-0.26283 -0.01033,-0.39035l3.6193,-5.90162c0.06089,-0.10881 0.1662,-0.16291 0.27613,-0.16805c0.1167,0 0.22508,0.04724 0.29322,0.13126l6.74619,10.48564c0.03856,0.06984 0.07201,0.13142 0.07201,0.2103l0,12.82948l-0.00014,0l-0.00001,0z" id=logotype-mini-6 />
+            <path d="m59.97702,25.09838c0,0.15309 -0.09435,0.27937 -0.23757,0.32441c-0.02312,0.01419 -0.06831,0.01419 -0.10561,0.01419c0,0 -0.20135,-0.04802 -0.26132,-0.1322l-10.38076,-17.40306c-0.08324,-0.10881 -0.09358,-0.26283 -0.02235,-0.39035l3.63473,-5.90162c0.05719,-0.10881 0.15509,-0.16291 0.27102,-0.16805c0.10683,0 0.22725,0.04723 0.28662,0.13126l6.74679,10.48564c0.04534,0.06984 0.06831,0.13141 0.06831,0.2103l0,12.82948l0.00014,0l-0.00001,0l-0.00001,0l0.00001,0z"/>
+            <path d="m68.60023,15.26313l-6.07848,9.8429c-0.07217,0.10741 -0.18053,0.16446 -0.28738,0.16446c-0.04763,0 -0.07123,0 -0.09341,-0.01511c-0.15388,-0.04193 -0.26364,-0.17273 -0.26364,-0.328l0,-24.58939c0,-0.18177 0.16928,-0.33798 0.35706,-0.33798l6.06876,0c0.19164,0 0.34689,0.15621 0.34689,0.33798l0,14.7465c0,0.06594 -0.02744,0.13048 -0.0498,0.17865l0,-0.00001z"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse" id=navnavnav>
+      <ul class="nav navbar-nav">
+        <li class=active><a href="#motion"></a></li>
+        <li><a href="#intro">終端極體</a></li>
+        <li><a href="#timeline">活動時程</a></li>
+        <li><a href="#expo">學生作品展</a></li>
+        <li class=dropdown>
+          <a href="" class=dropdown-toggle data-toggle=dropdown>活動&nbsp;<b class=caret></b></a>
+          <ul class=dropdown-menu>
+            <li><a href="#talk-peng"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;講座</a></li>
+            <li><a href="#film-odyssey"><span class="glyphicon glyphicon-film"></span>&nbsp;&nbsp;影展</a></li>
+            <li><a href="#workshop"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;工作坊</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#location"><span class="glyphicon glyphicon-map-marker hidden-xs"></span><span class=visible-xs>活動地點</span></a></li>
+      </ul>
+    </div>
+  </nav>
+  <div id=svgMotionTitle class=hidden-xs><img src="images/title.png" class=img-responsive></div>
+  <div id=motion>
+    <div id=motionBg class=hidden-xs>
+      <div class="svg-container svgMotion">
+        <svg class=svg-content height=560 viewbox="0 0 1400 560" preserveaspectratio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <lineargradient id=gd-1 x1=0 y1=0 x2=0 y2=0 spreadmethod=pad>
+              <stop stop-color="#13ad67" offset=0 />
+              <stop stop-color="#13ad67" offset=0.3 />
+              <stop stop-color="#13ad67" stop-opacity=0 offset=0.9 />
+              <stop stop-color="#13ad67" stop-opacity=0 offset=1 />
+            </lineargradient>
+          </defs>
+          <g id=svgMotionDot>
+            <g id=d-d>
+              <circle cx=403.21199 cy=215.425 r=5.265 />
+              <circle cx=237.48599 cy=54.311 r=5.265 />
+              <circle cx=208.33699 cy=216.557 r=5.265 />
+              <circle cx=160.16199 cy=217.467 r=2.848 />
+              <circle cx=711.22299 cy=214.957 r=5.265 />
+              <circle cx=753.09399 cy=129.508 r=7.191 />
+              <circle cx=458.70999 cy=320.55 r=5.265 />
+              <circle cx=579.96899 cy=262.325 r=5.265 />
+              <circle cx=1017.10199 cy=100.852 r=2.931 />
+              <circle cx=794.70399 cy=235.231 r=2.931 />
+              <circle cx=866.89799 cy=226.653 r=2.931 />
+              <circle cx=887.63099 cy=348.728 r=2.932 />
+              <circle cx=1088.68999 cy=54.994 r=2.931 />
+              <circle cx=1237.64299 cy=25.665 r=2.931 />
+              <circle cx=1196.01999 cy=54.364 r=2.932 />
+              <circle cx=1363.48099 cy=36.129 r=2.931 />
+              <circle cx=625.03199 cy=64.155 r=2.931 />
+              <circle cx=921.45199 cy=21.063 r=2.931 />
+              <circle cx=791.77399 cy=56.622 r=2.931 />
+              <circle cx=708.22299 cy=12.828 r=2.932 />
+              <circle cx=517.13299 cy=79.677 r=2.931 />
+              <circle cx=370.57699 cy=28.597 r=2.931 />
+              <circle cx=270.10399 cy=120.632 r=2.932 />
+              <circle cx=136.12199 cy=26.296 r=2.931 />
+              <circle cx=68.21899 cy=9.803 r=2.932 />
+              <circle cx=1284.81899 cy=260.983 r=2.932 />
+              <circle cx=1115.61999 cy=271.208 r=2.932 />
+              <circle cx=1330.04999 cy=104.159 r=2.931 />
+              <circle cx=589.08399 cy=113.656 r=5.265 />
+              <circle cx=993.75899 cy=283.457 r=5.265 />
+              <circle cx=745.90299 cy=238.632 r=5.265 />
+              <circle cx=1041.35899 cy=173.228 r=5.265 />
+              <circle cx=904.49399 cy=140.934 r=5.265 />
+              <circle cx=1155.59599 cy=205.56 r=5.265 />
+              <circle cx=1221.64699 cy=143.051 r=5.265 />
+              <circle cx=1314.70699 cy=168.436 r=5.265 />
+              <circle cx=1030.82999 cy=351.029 r=5.265 />
+              <circle cx=481.97299 cy=135.152 r=5.265 />
+              <circle cx=331.11699 cy=145.067 r=3.715 />
+              <circle cx=95.49399 cy=195.418 r=5.265 />
+              <circle cx=138.77599 cy=112.524 r=5.265 />
+              <circle cx=41.46199 cy=49.031 r=5.265 />
+              <circle cx=390.71699 cy=104.343 r=3.716 />
+              <circle cx=318.42199 cy=255.019 r=5.265 />
+              <circle cx=566.63899 cy=191.01 r=3.323 />
+            </g>
+            <g id=d-l>
+              <circle cx=403.21199 cy=223.689 r=5.265 />
+              <circle cx=237.48599 cy=62.576 r=5.265 />
+              <circle cx=208.33699 cy=224.822 r=5.265 />
+              <circle cx=160.16199 cy=221.938 r=2.848 />
+              <circle cx=711.22299 cy=223.222 r=5.265 />
+              <circle cx=753.09399 cy=140.797 r=7.191 />
+              <circle cx=458.70999 cy=328.815 r=5.265 />
+              <circle cx=579.96899 cy=270.589 r=5.265 />
+              <circle cx=1017.10199 cy=105.453 r=2.931 />
+              <circle cx=794.70399 cy=239.832 r=2.931 />
+              <circle cx=866.89799 cy=231.255 r=2.931 />
+              <circle cx=887.63099 cy=353.33 r=2.932 />
+              <circle cx=1088.68999 cy=59.596 r=2.931 />
+              <circle cx=1237.64299 cy=30.267 r=2.931 />
+              <circle cx=1196.01999 cy=58.966 r=2.932 />
+              <circle cx=1363.48099 cy=40.731 r=2.931 />
+              <circle cx=625.03199 cy=68.757 r=2.931 />
+              <circle cx=921.45199 cy=25.665 r=2.931 />
+              <circle cx=791.77399 cy=61.224 r=2.931 />
+              <circle cx=708.22299 cy=17.431 r=2.932 />
+              <circle cx=517.13299 cy=84.279 r=2.931 />
+              <circle cx=370.57699 cy=33.198 r=2.931 />
+              <circle cx=270.10399 cy=125.233 r=2.932 />
+              <circle cx=136.12199 cy=30.897 r=2.931 />
+              <circle cx=68.21899 cy=14.404 r=2.932 />
+              <circle cx=1284.81899 cy=265.585 r=2.932 />
+              <circle cx=1115.61999 cy=275.81 r=2.932 />
+              <circle cx=1330.04999 cy=108.761 r=2.931 />
+              <circle cx=589.08399 cy=121.921 r=5.265 />
+              <circle cx=993.75899 cy=291.722 r=5.265 />
+              <circle cx=745.90299 cy=246.896 r=5.265 />
+              <circle cx=1041.35899 cy=181.493 r=5.265 />
+              <circle cx=904.49399 cy=149.199 r=5.265 />
+              <circle cx=1155.59599 cy=213.825 r=5.265 />
+              <circle cx=1221.64699 cy=151.316 r=5.265 />
+              <circle cx=1314.70699 cy=176.701 r=5.265 />
+              <circle cx=1030.82999 cy=359.294 r=5.265 />
+              <circle cx=481.97299 cy=143.417 r=5.265 />
+              <circle cx=331.11699 cy=150.898 r=3.715 />
+              <circle cx=95.49399 cy=203.682 r=5.265 />
+              <circle cx=138.77599 cy=120.789 r=5.265 />
+              <circle cx=41.46199 cy=57.295 r=5.265 />
+              <circle cx=390.71699 cy=110.176 r=3.716 />
+              <circle cx=318.42199 cy=263.284 r=5.265 />
+              <circle cx=566.63899 cy=196.227 r=3.323 />
+            </g>
+          </g>
+          <g id=svgMotionLine>
+            <g id=w9>
+              <line x1=12.5 y1=45.5 x2=12.5 y2=154.80647 />
+              <line x1=116.5 y1=139.59676 x2=116.5 y2=264.40323 />
+              <line x1=503.125 y1=181.50302 x2=503.125 y2=306.30949 />
+              <line x1=934.375 y1=176.81552 x2=934.375 y2=301.62199 />
+              <line x1=1081.25 y1=100.25302 x2=1081.25 y2=225.05949 />
+              <line x1=1155.75 y1=6.06552 x2=1155.75 y2=130.87199 />
+              <line x1=1281.8125 y1=6.56552 x2=1281.8125 y2=131.37199 />
+            </g>
+            <g id=w5>
+              <line x1=68.1875 y1=85.50302 x2=68.1875 y2=154.80949 />
+              <line x1=193 y1=50.09676 x2=193 y2=119.40323 />
+              <line x1=454 y1=30.84677 x2=454 y2=100.15323 />
+              <line x1=256 y1=180.84677 x2=256 y2=250.15323 />
+              <line x1=366 y1=197.84677 x2=366 y2=267.15323 />
+              <line x1=436 y1=271.84677 x2=436 y2=341.15323 />
+              <line x1=595 y1=304.84677 x2=595 y2=374.15323 />
+              <line x1=638 y1=213.84677 x2=638 y2=283.15323 />
+              <line x1=667 y1=127.84677 x2=667 y2=197.15323 />
+              <line x1=849 y1=15.84677 x2=849 y2=85.15323 />
+              <line x1=818 y1=161.84677 x2=818 y2=231.15323 />
+              <line x1=870 y1=260.84677 x2=870 y2=330.15323 />
+              <line x1=1027 y1=237.84676 x2=1027 y2=307.15323 />
+              <line x1=1112 y1=320.84676 x2=1112 y2=390.15323 />
+              <line x1=1212 y1=232.84676 x2=1212 y2=302.15323 />
+              <line x1=1243 y1=184.84676 x2=1243 y2=254.15323 />
+              <line x1=1374 y1=95.84676 x2=1374 y2=165.15323 />
+            </g>
+          </g>
+          <g id=svgMotionLineBold>
+            <path fill="url(#gd-1)" d="m412.14697,532.62l0,-153.103c0,-11.478 -9.30499,-20.784 -20.78497,-20.784c-11.479,0 -20.78403,9.306 -20.78403,20.784l0,153.10397l41.569,0l0,-0.00098z"/>
+            <path fill="url(#gd-1)" d="m42.52797,409.01099l0,-191.94299c0,-14.39099 -11.667,-26.058 -26.05901,-26.058c-14.391,0 -26.058,11.666 -26.058,26.058l0,191.94299l52.11701,0z"/>
+            <path fill="url(#gd-1)" d="m54.46396,399.052l0,-103.54999c0,-7.76401 -6.295,-14.05801 -14.05899,-14.05801s-14.05802,6.29401 -14.05802,14.05801l0,103.54999l28.11701,0z"/>
+            <path fill="url(#gd-1)" d="m435.71698,559.979l0,-86.80698c0,-6.50897 -5.276,-11.78497 -11.785,-11.78497s-11.785,5.276 -11.785,11.78497l0,86.80698l23.57001,0z"/>
+            <path fill="url(#gd-1)" d="m559.96899,510.68301l0,-109.043c0,-8.17599 -6.62695,-14.80402 -14.80396,-14.80402c-8.17505,0 -14.80304,6.62802 -14.80304,14.80402l0,109.043l29.60699,0z"/>
+            <path fill="url(#gd-1)" d="m866.06702,479.16403l0,-76.65201c0,-5.74799 -4.65802,-10.40698 -10.40601,-10.40698c-5.74597,0 -10.40601,4.659 -10.40601,10.40698l0,76.65201l20.81201,0z"/>
+            <path fill="url(#gd-1)" d="m740.39502,526.13696l0,-222.24496c0,-16.66299 -13.50806,-30.17099 -30.172,-30.17099c-16.66302,0 -30.17102,13.508 -30.17102,30.17099l0,222.24496l60.34302,0z"/>
+            <path fill="url(#gd-1)" d="m968.63,441.33902l0,-121.478c0,-9.10699 -7.38397,-16.491 -16.49103,-16.491c-9.10797,0 -16.49097,7.384 -16.49097,16.491l0,121.478l32.98199,0z"/>
+            <path fill="url(#gd-1)" d="m1406.52588,445.67599l0,-222.24399c0,-16.66301 -13.50793,-30.17099 -30.1709,-30.17099s-30.17114,13.50798 -30.17114,30.17099l0,222.24399l60.34204,0z"/>
+            <path fill="url(#gd-1)" d="m1021.26196,504.17099l0,-81.90399c0,-6.142 -4.97797,-11.12 -11.11902,-11.12c-6.14099,0 -11.11896,4.978 -11.11896,11.12l0,81.90399l22.23798,0z"/>
+            <path fill="url(#gd-1)" d="m1211.14697,457.14798l0,-91.42401c0,-6.85498 -5.55701,-12.41098 -12.41101,-12.41098c-6.85596,0 -12.41199,5.55701 -12.41199,12.41098l0,91.42401l24.823,0z"/>
+            <path fill="url(#gd-1)" d="m1154.75293,514.83398l0,-74.92294c0,-5.617 -4.55396,-10.17102 -10.172,-10.17102c-5.61694,0 -10.17102,4.55402 -10.17102,10.17102l0,74.92294l20.34302,0z"/>
+            <path fill="url(#gd-1)" d="m1186.32397,443.97702l0,-113.17001c0,-8.48499 -6.87891,-15.36298 -15.36401,-15.36298c-8.48401,0 -15.36304,6.87799 -15.36304,15.36298l0,113.17001l30.72705,0z"/>
+            <path fill="url(#gd-1)" d="m935.64697,472.28702l0,-96.34302c0,-7.22299 -5.85602,-13.07901 -13.08002,-13.07901c-7.224,0 -13.07898,5.85699 -13.07898,13.07901l0,96.34302l26.159,0z"/>
+            <path fill="url(#gd-1)" d="m376.82498,474.14401l0,-138.74301c0,-10.401 -8.43198,-18.83401 -18.836,-18.83401c-10.401,0 -18.83398,8.43301 -18.83398,18.83401l0,138.74301l37.66998,0z"/>
+            <path fill="url(#gd-1)" d="m258.26999,432.74203l0,-153.10303c0,-11.479 -9.306,-20.785 -20.785,-20.785c-11.47899,0 -20.784,9.306 -20.784,20.785l0,153.10297l41.569,0l0,0.00006z"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class=container>
+    <div class="row visible-xs">
+      <div class="col-xs-8 text-center">
+        <img src="images/title-l.png" class=img-responsive style="margin-bottom:-50px; margin-top:30px;">
+      </div>
+    </div>
+    <div class=row>
+      <div class="col-sm-9 col-sm-offset-2" id=intro style=z-index:2>
+        <div class=holder-50></div>
+        <p>
+          <h4><strong>前言&nbsp;│&nbsp;What is TTDW ?</strong></h4>
+          台灣科大設計週（Taiwan Tech Design Week, TTDW）<br>
+          為台灣科技大學工商業設計系暨創意設計系一年一度最重要的活動，<br>
+          於2012年開始，我們將往年的短期教學成果展覽，<br>
+          擴大為一週的校際設計嘉年華，<br>
+          並加入表演、講座、工作坊、電影欣賞，致力標舉臺科設計的品牌特色，<br>
+          同時建立一個學生在課堂之外大展身手的舞台。
+        </p>
+        <img src="images/td.png" class="img-responsive hidden-xs" style="margin:60px 0 30px">
+        <img src="images/td-l.png" class="img-responsive visible-xs" style="margin:40px 0 30px">
+        <p>
+          <h4><strong>終端極體&nbsp;│&nbsp;Terminal Diode</strong></h4>
+          2014 台灣科大設計週主題為《終端極體》。<br>
+          五十年後的世界會是如何？我們被科技綁架，<br>
+          我們該如何繼續解讀自己的生活。今年我們以未來為主題，<br>
+          試圖用另一個角度來檢視自己，看到更遠的世界。
+        </p>
+        <p class=force>
+          <span class=f1>訊息傳遞來───去，崩壞解碼</span><br>
+          <span class=f2>試圖告訴未來：關於我們、關於→←↕◄►</span><br>
+          <span class=f3>我們所不知道的那些</span><br>
+          <span class=f4>──────────────────</span><br>
+          <span class=f5>如果有一天，我們只剩下</span><br>
+          <span class=f6>我們看不懂</span><br><br>
+          <span class=f7>的&nbsp;■&nbsp;■&nbsp;■</span><br><br>
+          <span class=f8>那麼該如何繼續解讀</span><br><br>
+          <span class=f9>？</span>
+        </p>
+      </div>
+    </div>
+    <div class=row id=timeline>
+      <div class=holder-50></div>
+      <div class=col-xs-12>
+        <div class=table-responsive>
+          <h1>活動時程</h1>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td rowspan=2><strong>開幕茶會</strong></td>
+                <td rowspan=2>5/3 (六)</td>
+                <td>17:00 ─ 19:00</td>
+                <td>開幕茶會</td>
+                <td rowspan=2></td>
+                <td rowspan=2>T2第二教學大樓&nbsp;3F&nbsp;灰磚設計廣場</td>
+              </tr>
+              <tr>
+                <td>18:30 ─ 20:00</td>
+                <td>星光展導覽</td>
+              </tr>
+              <tr>
+                <td><a href="#expo">學生作品展</a></td>
+                <td>5/3 (六) ─ 5/11 (日)</td>
+                <td>10:00 ─ 19:00</td>
+                <td></td>
+                <td>「終端極體」<br>工商業設計系/創意設計學士班&nbsp;大一至大三</td>
+                <td>T2第二教學大樓&nbsp;3F&nbsp;灰磚設計廣場</td>
+              </tr>
+              <tr>
+                <td rowspan=2><strong>系列講座</strong></td>
+                <td>5/4 (日)</td>
+                <td>14:00 ─ 15:45</td>
+                <td><a href="#talk-peng">彭星凱</a></td>
+                <td>設計的可能性：封面設計的思考哲學</td>
+                <td rowspan=2>E2-324</td>
+              </tr>
+              <tr>
+                <td>5/4 (日)</td>
+                <td>16:00 ─ 17:45</td>
+                <td><a href="#talk-liu">劉辰岫</a></td>
+                <td>人與科技</td>
+              </tr>
+              <tr>
+                <td rowspan=2><strong>系列影展</strong></td>
+                <td>5/6 (二)</td>
+                <td>19:30 ─ 21:50</td>
+                <td></td>
+                <td><a href="#film-odyssey">2001：太空漫遊&nbsp;<small>(1968)</small></a>&nbsp;&nbsp;<small>[140 min]</small></td>
+                <td rowspan=2>灰磚設計廣場</td>
+              </tr>
+              <tr>
+                <td>5/9 (五)</td>
+                <td>19:30 ─ 21:10</td>
+                <td></td>
+                <td><a href="#film-tron">Tron&nbsp;<small>(1982)</small></a>&nbsp;&nbsp;<small>[100 min]</small></td>
+              </tr>
+              <tr>
+                <td><a href="#workshop">工作坊</a></td>
+                <td>5/10 (六) ─ 5/11 (日)</td>
+                <td>10:00 ─ 14:00</td>
+                <td>吳俊儀<br>莊孟翰</td>
+                <td>氰版印刷記事本製作</td>
+                <td>E2-324</td>
+              </tr>
+              <tr>
+                <td><strong>畢業校內展</strong></td>
+                <td>5/8 (四) ─ 5/10 (六)</td>
+                <td>10:00 ─ 18:00</td>
+                <td></td>
+                <td><a href="https://www.facebook.com/TaiwanTechDesign" target=_blank>「次類思考」</a><br>第十四屆工商業設計系/創意設計學士班<br>大四畢業製作校內展</td>
+                <td>IB國際大樓一樓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row expo" id=expo>
+      <div class=holder-50></div>
+      <div class=col-sm-4 style=margin-bottom:25px>
+        <h1>學生作品展</h1>
+        延續傳統展出「工商業設計系成果展」，發表系上課程教學的成果，從這個課程優秀的作品的作品中透見台科設計在教學上的重視，讓系內同學可以彼此切磋琢磨，學弟妹可以看見學長姐成長的軌跡與方向，學長姐可以因著一屆比一屆優秀的學弟妹，自我督促。
+      </div>
+      <div class=col-sm-8>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/01.png" class=img-responsive />
+          <strong>動畫設計</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/02.png" class=img-responsive />
+          <strong>廣告設計</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/03.png" class=img-responsive />
+          <strong>包裝設計</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/04.png" class=img-responsive />
+          <strong>視覺傳達</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/05.png" class=img-responsive />
+          <strong>編排設計</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/06.png" class=img-responsive />
+          <strong>產品設計</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/07.png" class=img-responsive />
+          <strong>造形設計</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/08.png" class=img-responsive />
+          <strong>模型製作</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/09.png" class=img-responsive />
+          <strong>表現技法</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/10.png" class=img-responsive />
+          <strong>電腦輔助</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/11.png" class=img-responsive />
+          <strong>基礎攝影</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/12.png" class=img-responsive />
+          <strong>專題攝影</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/13.png" class=img-responsive />
+          <strong>微電影<span class=hidden-xs>設計</span></strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/14.png" class=img-responsive />
+          <strong>設計素描</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/15.png" class=img-responsive />
+          <strong>設計繪畫</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/16.png" class=img-responsive />
+          <strong>設計概論</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/17.png" class=img-responsive />
+          <strong>圖像化界面</strong>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 text-center">
+          <img src="images/icon/18.png" class=img-responsive />
+          <strong>網站規劃</strong>
+        </div>
+      </div>
+    </div>
+    <div class="row talk" id=talk-peng>
+      <div class=holder-50></div>
+      <div class="col-sm-3 t-right">
+        <h1>系列講座</h1>
+      </div>
+      <div class=col-sm-5>
+        <h3><a href="https://www.facebook.com/fis.workshop" target=_blank>彭星凱</a>&nbsp;<br><small>空白地區 | Fi (Peng, Hsing Kai)</small></h3>
+        <h5><span class=inverse>設計的可能性：封面設計的思考哲學</span></h5>
+        去年某位出版社總編寄來的信裡，最後寫了一句話：「希望你繼續為了增加書籍的『附加價值』而努力」。事實上我當時覺得這說法挺酷的，但經歷幾次學習自我認同的過程再回想，才開始質疑，為何我們會認為設計是「附加價值」而不是「產品價值」呢？設計師該以什麼樣的態度來面對產品、包裝產品；或如何面對設計、甚至包裝設計？我們總以設計師自居，但我們是否真的瞭解什麼是「設計」？
+      </div>
+      <div class="col-sm-4 col-md-3 col-lg-2 cap">
+        <img src="images/peng.jpg" class="img-responsive c"/>
+        <span class=caption><span><h2>5/4</h2>14:00 ─ 15:45</span></span>
+      </div>
+    </div>
+    <div class="row talk" id=talk-liu>
+      <div class=holder-50></div>
+      <div class="col-sm-5 col-sm-offset-3">
+        <h3><a href="https://www.facebook.com/newartandscience" target=_blank>劉辰岫</a>&nbsp;<small>Dr.i</small></h3>
+        <h5><span class=inverse>人與科技</span></h5>
+        科學和藝術向來被視為兩個互不相關的領域，但其本質或者甚至工作形態上卻很相似，而兩者之間的關聯直接影響到本世紀的設計者所著重的核心原點與工具的選擇。本演講將以實際地經驗與作品來論述此關聯性，並且指出什麼是將人文與科技結合的關鍵概念。
+      </div>
+      <div class="col-sm-4 col-md-3 col-lg-2 cap">
+        <img src="images/liu.jpg" class="img-responsive c"/>
+        <span class=caption><span><h2>5/4</h2>16:00 ─ 17:45</span></span>
+      </div>
+    </div>
+    <div class="row film" id=film-odyssey>
+      <div class=holder-50></div>
+      <div class="col-sm-3 t-right">
+        <h1>系列影展</h1>
+      </div>
+      <div class=col-sm-5>
+        <h5><span class=inverse>2001：太空漫遊&nbsp;<small>(1968)</small></span><small>&nbsp;Stanley Kubrick</small></h5>
+        《2001：太空漫遊》在1968年推出，由 Stanley Kubrick 導演，是一部極具爭議卻又評價崇高的科幻電影。故事是根據科幻小說家 Arthur Clark 所撰寫的各種短篇小說的部分內容所改編，包括1950年的短篇《前哨》，並間接引用《童年末日》中 Arthur Clark 大力提倡的人類優越論點為其題材，從器物與科技發展進程上，大膽地假設一文明終點。
+      </div>
+      <div class="col-sm-4 col-md-3 col-lg-2 cap">
+        <img src="images/odyssey.jpg" class="img-responsive c"/>
+        <span class=caption><span><h2>5/6</h2>19:30 ─ 21:50</span></span>
+      </div>
+    </div>
+    <div class="row film" id=film-tron>
+      <div class=holder-50></div>
+      <div class="col-sm-5 col-sm-offset-3">
+        <h5><span class=inverse>Tron&nbsp;<small>(1982)</small></span>&nbsp;<small>&nbsp;Steven Lisberger</small></h5>
+        《Tron》是一部1982年迪士尼科幻電影。由 Steven Lisberger 執導、Jeff Bridges 等主演，及台灣動畫公司「宏廣」負責了絕大部分的手繪上色工程。本片另於2010年推出續集 ──《創：光速戰記》。<br><br>
+        故事敘述一家電腦公司開發了人工智慧程式，但中央控制程式不再乖乖聽人操控而想掌控世界。被這家公司解僱的一位電腦天才 Kevin Flynn 在好友同事 Alan Bradley 的求助下，潛進公司電腦要破解這內部連線系統的運作方式，但他卻意外被吸入電腦當中，因此 Kevin 必須要跟好友 Alan 所創造出的好程式「創」（Tron）一同並肩作戰，透過內部的連線潛進中央控制系統去進行破壞，並要與外界取得聯繫，才能讓他脫離電子世界。
+      </div>
+      <div class="col-sm-4 col-md-3 col-lg-2 cap">
+        <img src="images/tron.jpg" class="img-responsive c"/>
+        <span class=caption><span><h2>5/9</h2>19:30 ─ 21:10</span></span>
+      </div>
+    </div>
+    <div class="row workshop" id=workshop>
+      <div class=holder-50></div>
+      <div class="col-sm-3 t-right">
+        <h1>工作坊</h1>
+      </div>
+      <div class=col-sm-5>
+        <h3>莊孟翰、吳俊儀</h3>
+        <h5><span class=inverse style="font-weight:normal;padding:1px 10px">氰版印刷記事本製作</span><a class=sign href="http://goo.gl/n0WIVs" target=_blank>線上報名</a></h5>
+        結合氰版印刷與裝訂，做出一本以氰版印刷封面的記事本；藉由此次活動，學習相關技術，以期能應用在未來的表現形式，同時激勵靈感，使設計更加活絡多元。<br><br>
+        ● 參加限額 20 人，線上報名成功後將以電子郵件通知與說明所需用具。
+      </div>
+      <div class="col-sm-4 col-md-3 col-lg-2 cap">
+        <img src="images/jhuang.jpg" class="img-responsive c"/>
+        <img src="images/wu.jpg" class="img-responsive c"/>
+        <span class=caption><span><h2>5/10</h2>10:00 ─ 14:00</span></span>
+      </div>
+    </div>
+    <div class=row id=location>
+      <div class=holder-50></div>
+      <div class="col-xs-12 text-center" style="margin-bottom: 10px">
+        <h1>活動地點</h1>
+        <h5>台北市大安區基隆路四段43號</h5>
+        <h6>第二教學大樓 3樓 (灰磚設計廣場)</h6>
+      </div>
+      <div class=col-xs-12 id=gmap>
+        <div id=gmap-content></div>
+      </div>
+    </div>
+    <a id=footer></a>
+    <div class="footer hidden-xs">
+      <img src="images/school.png" class=img-responsive />
+    </div>
+  </div>
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="js/enquire.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="js/jquery.scrollmagic.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.11.6/TweenMax.min.js"></script>
+  <script src="js/TextPlugin.min.js"></script>
+  <script src="js/action.min.js"></script>
+  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDquHk43qRBeoRSxBeyG8JEeZsjQmrthsc"></script>
+  <script>function initialize(){var style=[{"elementType":"geometry.fill","stylers":[{"color":"#091038"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#13ad67"},{"weight":3}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"elementType":"labels","stylers":[{"invert_lightness":true}]},{"featureType":"landscape.man_made","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#13ad67"}]}];var ntust=new google.maps.LatLng(25.012053,121.540888);var stView=new google.maps.LatLng(25.012864,121.540726);var mapOptions={scrollwheel:false,center:ntust,zoom:17,mapTypeId:google.maps.MapTypeId.ROADMAP,mapTypeControl:false,styles:style};var map=new google.maps.Map(document.getElementById("gmap-content"),mapOptions);var goldStar={path:'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',fillColor:"yellow",fillOpacity:0.8,scale:0.5,strokeColor:"gold",strokeWeight:14};var img="images/pin.svg";var marker=new google.maps.Marker({title:"檢視校內建築位置 (T2-3F 灰磚設計廣場)",position:ntust,animation:google.maps.Animation.BOUNCE,icon:img,map:map});var panorama=map.getStreetView();panorama.setPosition(stView);panorama.setPov({heading:149.18,zoom:0,pitch:30});var stViewToggle=function toggleStreetView(){var toggle=panorama.getVisible();if(toggle==false){panorama.setVisible(true);}else{panorama.setVisible(false);}};google.maps.event.addListener(marker,'click',stViewToggle);};</script>
+</body>
+</html>
